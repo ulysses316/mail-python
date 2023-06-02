@@ -1,4 +1,5 @@
 import os
+from datetime import date
 import smtplib
 from email.mime.text import MIMEText
 import requests
@@ -17,7 +18,7 @@ env = Environment(loader=FileSystemLoader('.'))
 template = env.get_template('template.html')
 html_body = template.render(data)
 
-def enviar_correo(destinatario, asunto, mensaje):
+def enviar_correo(destinatario, asunto):
     # Configurar los detalles del correo electrónico
     remitente = os.getenv("SMTP_USER")  # Dirección de correo electrónico del remitente
     clave = os.getenv("SMTP_PASS")  # Contraseña de la cuenta de correo electrónico del remitente
@@ -44,4 +45,4 @@ def enviar_correo(destinatario, asunto, mensaje):
         print('Error al enviar el correo electrónico:', str(e))
 
 
-enviar_correo("mail@mail.com", "Olita de mar", "Este es un mensaje de prueba enviado desde un script de Python.")
+enviar_correo("ulises.gonzalez@pico.love", f"Resumen del dia {date.today().strftime('%d-%m-%Y')} Pico Love.")
