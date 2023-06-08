@@ -2,13 +2,15 @@ import os
 from datetime import date
 import smtplib
 from email.mime.text import MIMEText
-import requests
 from jinja2 import Environment, FileSystemLoader
 from dotenv import load_dotenv
 
+from getUsers import getUsers 
+
 load_dotenv()
 
-response = requests.get("http://localhost:3000/api/usuarios").json()
+# TODO: sustituir fecha por date.today().strftime('%d-%m-%Y')
+response = getUsers("2023-04-18", os.getenv("MONGODB_URI"))
 usuarios = []
 for objeto in response:
     usuarios.append(objeto["Nombre"])
